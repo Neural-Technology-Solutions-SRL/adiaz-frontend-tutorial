@@ -1,2 +1,2 @@
 # adiaz-frontend-tutorial
-Tutorial for fronend developer - React
+Tutorial for frontend developer - React
