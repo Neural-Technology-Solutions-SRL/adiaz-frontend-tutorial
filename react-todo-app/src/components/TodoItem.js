@@ -22,6 +22,10 @@ class TodoItem extends React.Component {
         }
     }
 
+    componentWillUnmount() {
+        console.log("Cleaning up...")
+    }
+
     render() {
         // Set styles with a js object
         const completedStyle = {
