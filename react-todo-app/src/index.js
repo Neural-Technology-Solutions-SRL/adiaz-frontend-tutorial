@@ -2,10 +2,10 @@ import React from "react";
 import ReactDOM from "react-dom";
 
 // Importing Components
-import TodoContainer from "./components/TodoContainer";
+import TodoContainer from "./functionBased/components/TodoContainer";
 
 // Importing Stylesheet
-import "./App.css";
+import "./functionBased/App.css";
 
 ReactDOM.render(
         <React.StrictMode>
