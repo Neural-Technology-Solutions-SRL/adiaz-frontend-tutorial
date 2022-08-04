@@ -3,6 +3,9 @@ import React, { useState, useEffect } from "react";
 // Import styles
 import styles from "./TodoItem.module.css"
 
+// Importing icons
+import { FaTrash } from "react-icons/fa"
+
 const TodoItem = (props) => {
     // state = {
     //     editing: false,
@@ -79,7 +82,12 @@ const TodoItem = (props) => {
                     checked={completed}
                     onChange={() => props.handleChangeProps(id)}
                 />
-                <button onClick={() => props.deleteTodoProps(id)}>Delete</button>
+                <button className="input-trash" onClick={() => props.deleteTodoProps(id)} >
+                    <FaTrash style={{
+                        color: "orangered", 
+                        fontSize: "16px"
+                    }} />
+                </button>
                 <span style={completed ? completedStyle : null}>{title}</span>
             </div>
             <input
@@ -87,9 +95,7 @@ const TodoItem = (props) => {
                 style={editMode}
                 className={styles.textInput}
                 value={title}
-                onChange={e => {
-                    props.setUpdate(e.target.value, id)
-                }}
+                onChange={e => { props.setUpdate(e.target.value, id) }}
                 onKeyDown={handleUpdatedDone}
             />
         </li>

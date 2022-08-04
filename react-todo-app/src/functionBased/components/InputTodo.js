@@ -1,5 +1,10 @@
 import React, { useState } from "react"
 
+// Importing icons
+import { IconContext } from "react-icons"
+import { FaPlusCircle } from "react-icons/fa"
+
+
 const InputTodo = (props) => {
     // console.log(useState("Hello"))
 
@@ -45,63 +50,25 @@ const InputTodo = (props) => {
                 name="title"
                 onChange={onChange}
             />
+            <IconContext.Provider value={{
+                    color: "darkcyan",
+                    style: { fontSize: "20px", color: "#ff0000" },
+                    className: "submit-iconn",
+            }}>
             <button className="input-submit">
-                Submit
+                {/* 
+                <FaPlusCircle style={{ 
+                    color: "darkcyan", 
+                    fontSize: "20px", 
+                    marginTop: "2px" 
+                }} /> 
+                */}
+                <FaPlusCircle />
+                <FaPlusCircle />
+                <FaPlusCircle />
             </button>
+            </IconContext.Provider>
         </form>
     )
 }
-
 export default InputTodo
-
-// import React, { useState } from "react"
-
-// const InputTodo = props => {
-//   const [inputText, setInputText] = useState({
-//     fName: "",
-//     lName: "",
-//   })
-
-//   const onChange = e => {
-//     setInputText(prevState => {
-//         return {
-//             ...inputText,
-//             [e.target.name]: e.target.value,
-//         }
-//     })
-//   }
-
-//   const handleSubmit = e => {
-//     e.preventDefault()
-//     console.log("submitted")
-//   }
-
-//   return (
-//     <>
-//       <form onSubmit={handleSubmit} className="form-container">
-//         <input
-//           type="text"
-//           className="input-text"
-//           placeholder="Add first name"
-//           value={inputText.fName}
-//           name="fName"
-//           onChange={onChange}
-//         />
-//         <input
-//           type="text"
-//           className="input-text"
-//           placeholder="Add last name"
-//           value={inputText.lName}
-//           name="lastName"
-//           onChange={onChange}
-//         />
-
-//         <button className="input-submit">Submit</button>
-//       </form>
-//       <h2>{inputText.fName}</h2>
-//       <h2>{inputText.lastName}</h2>
-//     </>
-//   )
-// }
-
-// export default InputTodo
