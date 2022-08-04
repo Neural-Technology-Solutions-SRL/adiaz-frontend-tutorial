@@ -25,18 +25,6 @@ const TodoContainer = () => {
         //     }
         // })
 
-        // setTodos(prevState =>
-        //     prevState.map(todo => {
-        //         if (todo.id === id) {
-        //             return {
-        //                 ...todo,
-        //                 completed: !todo.completed,
-        //             }
-        //         }
-        //         return todo
-        //     })
-        // )
-
         setTodos(prevState =>
             prevState.map(todo => {
                 if (todo.id === id) {
@@ -124,7 +112,7 @@ const TodoContainer = () => {
     };
 
     useEffect(() => {
-        // toring todos items
+        // storing todos items
         const temp = JSON.stringify(todos)
         localStorage.setItem("todos", temp)
     }, [todos]);
