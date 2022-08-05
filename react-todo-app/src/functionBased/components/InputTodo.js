@@ -64,8 +64,6 @@ const InputTodo = (props) => {
                 }} /> 
                 */}
                 <FaPlusCircle />
-                <FaPlusCircle />
-                <FaPlusCircle />
             </button>
             </IconContext.Provider>
         </form>

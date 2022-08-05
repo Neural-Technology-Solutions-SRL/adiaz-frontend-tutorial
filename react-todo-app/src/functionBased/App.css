@@ -64,10 +64,13 @@ body {
     border: none;
 }
 
-/* 
 .input-submit svg {
     color: darkcyan;
     font-size: 20px;
     margin-top: 2px;
 }
-*/
+
+.active {
+    color: orangered;
+    text-decoration: underline;
+}
