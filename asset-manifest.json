@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/Neural-Technology-Solutions-SRL/adiaz-frontend-tutorial/static/css/main.3d7f9a88.css",
+    "main.js": "/Neural-Technology-Solutions-SRL/adiaz-frontend-tutorial/static/js/main.d4a4f9b5.js",
+    "index.html": "/Neural-Technology-Solutions-SRL/adiaz-frontend-tutorial/index.html",
+    "main.3d7f9a88.css.map": "/Neural-Technology-Solutions-SRL/adiaz-frontend-tutorial/static/css/main.3d7f9a88.css.map",
+    "main.d4a4f9b5.js.map": "/Neural-Technology-Solutions-SRL/adiaz-frontend-tutorial/static/js/main.d4a4f9b5.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.3d7f9a88.css",
+    "static/js/main.d4a4f9b5.js"
+  ]
+}
