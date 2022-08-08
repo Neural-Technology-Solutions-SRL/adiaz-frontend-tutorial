@@ -16,21 +16,8 @@ import NotMatch from "../pages/NotMatch";
 const TodoContainer = () => {
     const [todos, setTodos] = useState(getInitialTodos())
 
+    //setTodos([...todos, newTodo])
     const handleChange = (id) => {
-        // this.setState(prevState => {
-        //     return {
-        //         todos: prevState.todos.map(todo => {
-        //             if (todo.id === id) {
-        //                 return {
-        //                     ...todo,
-        //                     completed: !todo.completed,
-        //                 }
-        //             }
-        //             return todo
-        //         }),
-        //     }
-        // })
-
         setTodos(prevState =>
             prevState.map(todo => {
                 if (todo.id === id) {
@@ -45,14 +32,6 @@ const TodoContainer = () => {
     };
 
     const delTodo = (id) => {
-        // this.setState({
-        //     todos: [
-        //         ...this.state.todos.filter(todo => {
-        //             return todo.id !== id;
-        //         })
-        //     ]
-        // });
-
         setTodos([
             ...todos.filter(todo => {
                 return todo.id !== id
@@ -67,23 +46,10 @@ const TodoContainer = () => {
             completed: false
         }
 
-        // this.setState({
-        //     todos: [...this.state.todos, newTodo]
-        // });
-
         setTodos([...todos, newTodo])
     };
 
     const setUpdate = (updatedTitle, id) => {
-        // this.setState({
-        //     todos: this.state.todos.map(todo => {
-        //         if (todo.id === id) {
-        //             todo.title = updatedTitle
-        //         }
-        //         return todo
-        //     }),
-        // })
-
         setTodos(
             todos.map(todo => {
                 if (todo.id === id) {
@@ -93,22 +59,6 @@ const TodoContainer = () => {
             })
         )
     };
-
-    // Mounting logic
-
-    // useEffect(() => {
-    //     console.log("test run")
-
-    //     // Getting stored items
-    //     const temp = localStorage.getItem("todos")
-    //     const loadedTodos = JSON.parse(temp)
-    //     if (loadedTodos) {
-    //         // this.setState({
-    //         //     todos: loadedTodos
-    //         // })
-    //         setTodos(loadedTodos)
-    //     }
-    // }, [setTodos])
 
     function getInitialTodos() {
         // Getting stored items
@@ -123,22 +73,6 @@ const TodoContainer = () => {
         localStorage.setItem("todos", temp)
     }, [todos]);
 
-    // return (
-    //     <Route path="/">
-    //         <div className="container">
-    //             <div className="inner">
-    //                 <Header />
-    //                 <InputTodo
-    //                     addTodoProps={addTodoItem} />
-    //                 <TodosList
-    //                     todos={todos}
-    //                     handleChangeProps={handleChange}
-    //                     deleteTodoProps={delTodo}
-    //                     setUpdate={setUpdate} />
-    //             </div>
-    //         </div>
-    //     </Route>
-    // )
     return (
         <>
             <Navbar />
