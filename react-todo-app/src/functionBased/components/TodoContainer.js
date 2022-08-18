@@ -25,7 +25,7 @@ const TodoContainer = () => {
           }
         });
 
-        const url = `https://localhost:7202/Todo/completed/${id}`;
+        const url = `https://localhost:7202/Todo/${id}/completed`;
         const response = await fetch(url, {
           method: "PUT",
           body: JSON.stringify(newTodo),
@@ -100,7 +100,7 @@ const TodoContainer = () => {
         const newTodo = {
             title: updatedTitle,
         }
-        const url = `https://localhost:7202/Todo/title/${id}`
+        const url = `https://localhost:7202/Todo/${id}/title`
         const response = await fetch(
             url, {
                 method: 'PUT', 
