@@ -7,40 +7,18 @@ import styles from "./TodoItem.module.css"
 import { FaTrash } from "react-icons/fa"
 
 const TodoItem = (props) => {
-    // state = {
-    //     editing: false,
-    // }
     const [editing, setEditing] = useState(false)
 
-    // handleEditing = () => {
-    //     // console.log("edit mode activated")
-    //     this.setState({
-    //         editing: true
-    //     })
-    // }
     const handleEditing = () => {
         setEditing(true)
     }
 
-    // handleUpdatedDone = (event) => {
-    //     // console.log(event.key)
-    //     if (event.key === "Enter") {
-    //         this.setState({ editing: false })
-    //     }
-    // }
     const handleUpdatedDone = (event) => {
         if (event.key === "Enter") {
             setEditing(false)
         }
     }
 
-    // Set styles with a js object
-    // const completedStyle = {
-    //     fontStyle: "italic",
-    //     color: "#595959",
-    //     opacity: 0.4,
-    //     textDecoration: "line-through",
-    // }
     const completedStyle = {
         fontStyle: "italic",
         color: "#595959",
@@ -56,16 +34,12 @@ const TodoItem = (props) => {
     let viewMode = {}
     let editMode = {}
 
-    // if (this.state.editing) {
     if (editing) {
         viewMode.display = "none"
     } else {
         editMode.display = "none"
     }
 
-    // componentWillUnmount() {
-    //     console.log("Cleaning up...")
-    // }
     useEffect(() => {
         return () => {
             console.log("Cleaning up")

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { v4 as uuidv4 } from "uuid";
+//import { v4 as uuidv4 } from "uuid";
 import { Routes, Route } from "react-router-dom";
 
 // Importing Components
@@ -14,64 +14,129 @@ import NotMatch from "../pages/NotMatch";
 
 
 const TodoContainer = () => {
-    const [todos, setTodos] = useState(getInitialTodos())
+    const [todos, setTodos] = useState([])
 
-    //setTodos([...todos, newTodo])
-    const handleChange = (id) => {
-        setTodos(prevState =>
-            prevState.map(todo => {
-                if (todo.id === id) {
-                    return {
-                        ...todo,
-                        completed: !todo.completed,
-                    }
-                }
-                return todo
+    const handleChange = async (id) => {
+        const newTodo = { completed: false };
+
+        todos.forEach((todo) => {
+          if (todo.id === id) {
+            newTodo.completed = !todo.completed;
+          }
+        });
+
+        const url = `https://localhost:7202/Todo/completed/${id}`;
+        const response = await fetch(url, {
+          method: "PUT",
+          body: JSON.stringify(newTodo),
+          headers: {
+            "Content-Type": "application/json",
+          },
+        });
+        if (response.status === 200) {
+          const resJson = await response.json();
+
+          setTodos((prevState) =>
+            prevState.map((todo) => {
+              if (todo.id === id) {
+                return {
+                  ...todo,
+                  completed: resJson.completed,
+                };
+              }
+              return todo;
             })
-        )
-    };
-
-    const delTodo = (id) => {
-        setTodos([
-            ...todos.filter(todo => {
-                return todo.id !== id
-            }),
-        ])
-    };
-
-    const addTodoItem = (title) => {
-        const newTodo = {
-            id: uuidv4(),
-            title: title,
-            completed: false
+          );
+        } else {
+          alert(
+            "We could not update the title of your task.\nPlease contact your administrator..."
+          );
         }
 
-        setTodos([...todos, newTodo])
     };
 
-    const setUpdate = (updatedTitle, id) => {
-        setTodos(
-            todos.map(todo => {
-                if (todo.id === id) {
-                    todo.title = updatedTitle
-                }
-                return todo
+    const delTodo = async (id) => {
+        const url = `https://localhost:7202/Todo/${id}`
+        const response = await fetch(
+            url, {
+                method: 'DELETE'
             })
-        )
+        
+        if (response.status === 200) {
+            setTodos([
+                ...todos.filter(todo => {
+                    return todo.id !== id
+                }),
+            ])
+            
+        } else {
+            alert("Task not found.\nPlease contact your administrator...")
+        }
+
     };
 
-    function getInitialTodos() {
-        // Getting stored items
-        const temp = localStorage.getItem("todos")
-        const savedTodos = JSON.parse(temp)
-        return savedTodos || []
+    const addTodoItem = async (title) => {
+        const newTodo = {
+            title: title,
+        }
+        const url = "https://localhost:7202/Todo"
+        const response = await fetch(
+            url, {
+                method: 'POST', 
+                body: JSON.stringify(newTodo),   
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+        if (response.status === 200) {
+            const resJson = await response.json()
+            setTodos([...todos, resJson])
+        } else { 
+            alert("We could not add your task to the list.\nPlease contact your administrator...") 
+        }
     };
+
+    const setUpdate = async (updatedTitle, id) => {
+        const newTodo = {
+            title: updatedTitle,
+        }
+        const url = `https://localhost:7202/Todo/title/${id}`
+        const response = await fetch(
+            url, {
+                method: 'PUT', 
+                body: JSON.stringify(newTodo),   
+                headers:{
+                    'Content-Type': 'application/json'
+                }
+            })
+        if (response.status === 200) {
+            const resJson = await response.json()
+            setTodos(
+                todos.map(todo => {
+                    if (todo.id === id) {
+                        todo.title = resJson.title
+                    }
+                    return todo
+                })
+            )
+        } else { 
+            alert("We could not update the title of your task.\nPlease contact your administrator...") 
+        }
+    };
+
+    const fetchTodos = async() => {
+        const url = "https://localhost:7202/Todo/"
+        const method = 'GET'
+        const response = await fetch(url, {method: method})
+        const resJson = await response.json()
+        //console.log(resJson)
+        setTodos(resJson)
+    }
 
     useEffect(() => {
-        // storing todos items
-        const temp = JSON.stringify(todos)
-        localStorage.setItem("todos", temp)
-    }, [todos]);
+        // managing all todos
+        fetchTodos()
+    },[]);
 
     return (
         <>
