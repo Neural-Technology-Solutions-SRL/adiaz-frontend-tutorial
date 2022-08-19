@@ -1,13 +1,13 @@
 {
   "files": {
-    "main.css": "/adiaz-frontend-tutorial/static/css/main.3d7f9a88.css",
-    "main.js": "/adiaz-frontend-tutorial/static/js/main.28b5768f.js",
+    "main.css": "/adiaz-frontend-tutorial/static/css/main.f8198524.css",
+    "main.js": "/adiaz-frontend-tutorial/static/js/main.d32134f1.js",
     "index.html": "/adiaz-frontend-tutorial/index.html",
-    "main.3d7f9a88.css.map": "/adiaz-frontend-tutorial/static/css/main.3d7f9a88.css.map",
-    "main.28b5768f.js.map": "/adiaz-frontend-tutorial/static/js/main.28b5768f.js.map"
+    "main.f8198524.css.map": "/adiaz-frontend-tutorial/static/css/main.f8198524.css.map",
+    "main.d32134f1.js.map": "/adiaz-frontend-tutorial/static/js/main.d32134f1.js.map"
   },
   "entrypoints": [
-    "static/css/main.3d7f9a88.css",
-    "static/js/main.28b5768f.js"
+    "static/css/main.f8198524.css",
+    "static/js/main.d32134f1.js"
   ]
 }
