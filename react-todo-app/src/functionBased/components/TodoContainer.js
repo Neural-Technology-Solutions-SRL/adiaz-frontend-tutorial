@@ -15,17 +15,12 @@ import NotMatch from "../pages/NotMatch";
 
 const TodoContainer = () => {
     const [todos, setTodos] = useState([])
+    const generalUrl = 'https://adiaz-todo-app.azurewebsites.net/Todo'
 
-    const handleChange = async (id) => {
-        const newTodo = { completed: false };
+    const handleChange = async (completedchange, id) => {
+        const newTodo = { completed: completedchange };
 
-        todos.forEach((todo) => {
-          if (todo.id === id) {
-            newTodo.completed = !todo.completed;
-          }
-        });
-
-        const url = `https://localhost:7202/Todo/${id}/completed`;
+        const url = `${generalUrl}/${id}/completed`;
         const response = await fetch(url, {
           method: "PUT",
           body: JSON.stringify(newTodo),
@@ -34,19 +29,8 @@ const TodoContainer = () => {
           },
         });
         if (response.status === 200) {
-          const resJson = await response.json();
-
-          setTodos((prevState) =>
-            prevState.map((todo) => {
-              if (todo.id === id) {
-                return {
-                  ...todo,
-                  completed: resJson.completed,
-                };
-              }
-              return todo;
-            })
-          );
+            const resJson = await response.json()
+            setTodos(resJson)
         } else {
           alert(
             "We could not update the title of your task.\nPlease contact your administrator..."
@@ -56,19 +40,15 @@ const TodoContainer = () => {
     };
 
     const delTodo = async (id) => {
-        const url = `https://localhost:7202/Todo/${id}`
+        const url = `${generalUrl}/${id}`
         const response = await fetch(
             url, {
                 method: 'DELETE'
             })
         
         if (response.status === 200) {
-            setTodos([
-                ...todos.filter(todo => {
-                    return todo.id !== id
-                }),
-            ])
-            
+            const resJson = await response.json()
+            setTodos(resJson)
         } else {
             alert("Task not found.\nPlease contact your administrator...")
         }
@@ -79,7 +59,7 @@ const TodoContainer = () => {
         const newTodo = {
             title: title,
         }
-        const url = "https://localhost:7202/Todo"
+        const url = `${generalUrl}`
         const response = await fetch(
             url, {
                 method: 'POST', 
@@ -90,7 +70,7 @@ const TodoContainer = () => {
             })
         if (response.status === 200) {
             const resJson = await response.json()
-            setTodos([...todos, resJson])
+            setTodos(resJson)
         } else { 
             alert("We could not add your task to the list.\nPlease contact your administrator...") 
         }
@@ -100,7 +80,7 @@ const TodoContainer = () => {
         const newTodo = {
             title: updatedTitle,
         }
-        const url = `https://localhost:7202/Todo/${id}/title`
+        const url = `${generalUrl}/${id}/title`
         const response = await fetch(
             url, {
                 method: 'PUT', 
@@ -111,21 +91,25 @@ const TodoContainer = () => {
             })
         if (response.status === 200) {
             const resJson = await response.json()
-            setTodos(
-                todos.map(todo => {
-                    if (todo.id === id) {
-                        todo.title = resJson.title
-                    }
-                    return todo
-                })
-            )
+            setTodos(resJson)
         } else { 
             alert("We could not update the title of your task.\nPlease contact your administrator...") 
         }
     };
 
+    const waitUpdate = async (updatedTitle, id) => {
+        setTodos(
+            todos.map(todo => {
+                if (todo.id === id) {
+                    todo.title = updatedTitle
+                }
+                return todo
+            })
+        )
+    }
+
     const fetchTodos = async() => {
-        const url = "https://localhost:7202/Todo/"
+        const url = `${generalUrl}`
         const method = 'GET'
         const response = await fetch(url, {method: method})
         const resJson = await response.json()
@@ -152,6 +136,7 @@ const TodoContainer = () => {
                                 handleChangeProps={handleChange}
                                 deleteTodoProps={delTodo}
                                 setUpdate={setUpdate}
+                                waitUpdate={waitUpdate}
                             />
                         </div>
                     </div>
